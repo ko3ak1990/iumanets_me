@@ -33,8 +33,8 @@ class AboutTab extends StatelessWidget {
               ),
               Text(
                 Constants.PROFILE_DESCRIPTION_SHORT,
-                style: Theme.of(context).textTheme.caption,
-                textScaleFactor: 2,
+                style: Theme.of(context).textTheme.bodySmall,
+                textScaler: const TextScaler.linear(2.0,),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(

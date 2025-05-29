@@ -1,70 +1,134 @@
-import 'package:iumanets_me/models/project_model.dart';
+import 'package:iumanets_me/models/experience_model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProjectWidget extends StatelessWidget {
-  final Employer _project;
-  final double _bottomPadding;
-  const ProjectWidget(this._project, this._bottomPadding, {super.key});
+class ExperienceWidget extends StatelessWidget {
+  final Experience experience;
+  final double imageSize;
+
+  const ExperienceWidget({
+    super.key,
+    required this.experience,
+    this.imageSize = 36,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, _bottomPadding),
-      child: InkWell(
-        onTap: onProjectClick,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                  flex: 40,
-                  child: Image.asset(
-                    _project.image,
-                    width: width * .15,
-                    height: width * .15,
-                  )),
-              Expanded(
-                flex: 4,
-                child: Container(),
-              ),
-              Expanded(
-                flex: 60,
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: <Widget>[
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isNarrow = constraints.maxWidth < 320;
+        final imgSize = isNarrow ? imageSize * 0.7 : imageSize;
+
+        return ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 220, maxWidth: 420),
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(22),
+            ),
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(22),
+                onTap: () => onProjectClick(experience.link),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (experience.logoAsset != null) ...[
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(
+                            experience.logoAsset!,
+                            height: imgSize,
+                            width: imgSize,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+                      ],
                       Text(
+                        experience.company,
                         textAlign: TextAlign.center,
-                        _project.name,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
                       ),
-                      SizedBox(
-                        height: height * .025,
-                      ),
+                      const SizedBox(height: 6),
                       Text(
-                        textAlign: TextAlign.start,
-                        _project.description,
-                        textScaleFactor: 1.2,
-                        style: Theme.of(context).textTheme.caption,
+                        experience.role,
+                        textAlign: TextAlign.center,
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "${experience.location} • ${experience.dateRange}",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.grey[600],
+                            ),
+                      ),
+                      if (experience.context != null) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          experience.context!,
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey[700],
+                                  ),
+                        ),
+                      ],
+                      const SizedBox(height: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: experience.achievements
+                            .map(
+                              (point) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text("• ",
+                                        style: TextStyle(fontSize: 16)),
+                                    Expanded(
+                                      child: Text(
+                                        point,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ],
                   ),
                 ),
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  void onProjectClick() {
-    launchUrl(Uri.parse(_project.link));
+  void onProjectClick(String? link) {
+    if (link != null) {
+      launchUrl(Uri.parse(link));
+    }
   }
 }
