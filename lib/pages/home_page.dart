@@ -31,11 +31,17 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: ThemeSwitcher.of(context).isDarkModeOn
-                ? const Icon(Icons.wb_sunny)
+                ? Image.asset(
+                    Assets.moon,
+                    height: 20,
+                    width: 20,
+                    color: Colors.white,
+                  )
                 : Image.asset(
                     Assets.moon,
                     height: 20,
                     width: 20,
+                    color: Colors.black,
                   ),
             onPressed: () => ThemeSwitcher.of(context).switchDarkMode(),
           )
@@ -51,6 +57,9 @@ class _HomePageState extends State<HomePage> {
               Assets.aboutMe,
               height: 20,
               width: 20,
+              color: ThemeSwitcher.of(context).isDarkModeOn
+                  ? Colors.white
+                  : Colors.black,
             ),
             label: 'About Me',
           ),
