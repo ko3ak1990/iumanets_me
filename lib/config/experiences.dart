@@ -2,13 +2,13 @@ import 'package:iumanets_me/config/assets.dart';
 
 import '../models/experience_model.dart';
 
-final List<Experience> projects = [
+final List<Experience> experiences = [
   Experience(
     company: 'Albert Heijn',
     role: 'Senior Android Developer',
     location: 'Zaandam, Netherlands',
     dateRange: 'Sep 2023 – Present',
-    context: 'Assortment/Search | Digital Shop',
+    context: 'Assortment & Search | Digital Shop',
     achievements: [
       'Migrated codebase to convention-based Gradle plugins, improving maintainability.',
       'Reduced build time by through Gradle optimizations.',
