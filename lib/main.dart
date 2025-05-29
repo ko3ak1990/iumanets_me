@@ -21,18 +21,21 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class IUApp extends StatelessWidget {
   const IUApp({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: Constants.PROFILE_NAME,
-      theme:ThemeSwitcher.of(context).isDarkModeOn?darkTheme(context):lightTheme(context),
-      home: HomePage(),
+      theme: ThemeSwitcher.of(context).isDarkModeOn
+          ? darkTheme(context)
+          : lightTheme(context),
+      home: const HomePage(),
     );
   }
 }

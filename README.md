@@ -1,6 +1,6 @@
 # iumanets_me
 
-A new Flutter project.
+CV project.
 
 ## Getting Started
 
