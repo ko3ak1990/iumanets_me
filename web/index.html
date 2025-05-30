@@ -33,6 +33,51 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+<div id="loader">
+  <style>
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #f7f9fc; /* Original light background */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: background 0.3s;
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #ccc;         /* Original spinner color */
+      border-top: 6px solid #2196f3;  /* Original blue accent */
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      background: transparent;
+      transition: border-color 0.3s;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    /* Dark mode styles (keep harmonious but more readable) */
+    @media (prefers-color-scheme: dark) {
+      #loader {
+        background: #181a1b;
+      }
+      .spinner {
+        border: 6px solid #444;
+        border-top: 6px solid #64b5f6; /* Softer blue for dark */
+      }
+    }
+  </style>
+  <div class="spinner"></div>
+</div>
+<script>
+  // Remove loader when Flutter is ready
+  window.addEventListener('flutter-first-frame', function () {
+    var loader = document.getElementById('loader');
+    if (loader) loader.remove();
+  });
+</script>
+<script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

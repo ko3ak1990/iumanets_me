@@ -53,6 +53,3 @@ flutter:
     - family: GoogleSansRegular
       fonts:
         - asset: assets/GoogleSansRegular.ttf
-    - family: MaterialIcons
-      fonts:
-        - asset: assets/MaterialIcons-Regular.otf
