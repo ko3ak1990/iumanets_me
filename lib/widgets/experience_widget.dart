@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:iumanets_me/models/experience_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ExperienceWidget extends StatelessWidget {
   final Experience experience;

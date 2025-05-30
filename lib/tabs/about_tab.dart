@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:iumanets_me/config/assets.dart';
 import 'package:iumanets_me/config/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutTab extends StatelessWidget {
   const AboutTab({super.key});
@@ -24,9 +23,11 @@ class AboutTab extends StatelessWidget {
                 height: 20,
               ),
               const Text(
-                textAlign : TextAlign.center,
+                textAlign: TextAlign.center,
                 Constants.PROFILE_NAME,
-                textScaleFactor: 4,
+                textScaler: TextScaler.linear(
+                  4.0,
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -34,7 +35,9 @@ class AboutTab extends StatelessWidget {
               Text(
                 Constants.PROFILE_DESCRIPTION_SHORT,
                 style: Theme.of(context).textTheme.bodySmall,
-                textScaler: const TextScaler.linear(2.0,),
+                textScaler: const TextScaler.linear(
+                  2.0,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(

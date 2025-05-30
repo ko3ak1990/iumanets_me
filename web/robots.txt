@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iumanets-me.web.app/sitemap.xml

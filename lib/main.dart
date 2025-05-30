@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:iumanets_me/config/constants.dart';
 import 'package:iumanets_me/pages/home_page.dart';
 import 'package:iumanets_me/widgets/theme_inherited_widget.dart';
-import 'package:flutter/material.dart';
 
 import 'config/themes.dart';
 
